@@ -3,12 +3,23 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// const connectionString = process.env.MONGO_CON
+// mongoose = require('mongoose');
+// mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true});
+
+//Get the default connection 
+// var db = mongoose.connection; 
+// //Bind connection to error event  
+// db.on('error', console.error.bind(console, 'MongoDB connectionerror:')); 
+// db.once("open", function(){console.log("Connection to DB succeeded")}); 
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var shoesRouter = require('./routes/shoes');
 var addmodsRouter = require('./routes/addmods');
 var selectorRouter = require('./routes/selector');
+var Shoes = require('./models/shoes');
+var resourceRouter = require('./routes/resource');
 var app = express();
 
 // view engine setup
@@ -26,6 +37,7 @@ app.use('/users', usersRouter);
 app.use('/shoes', shoesRouter);
 app.use('/addmods', addmodsRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -41,5 +53,30 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+const connectionString = process.env.MONGO_CON
+ mongoose = require('mongoose');
+ mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true});
+
+
+
+async function recreateDB(){
+// Delete everything
+ await Shoes.deleteMany();
+ 
+ 
+  var results = [{"type":"Sneakers","brand":'Nike',"size":07},
+                 {"type":"Boots","brand":'Woodland',"size":06},
+                 {"type":"sports", "brand":'Adidas',"size":05}]
+ 
+ for(i in results){
+  let instance = new Shoes({type: results[i]["type"], brand: results[i]["brand"], size:results[i]["size"]});
+   instance.save( function(err,doc) {
+     if(err) return console.error(err);
+     console.log("object added.")
+     });
+ } 
+ } 
+ let reseed = true;
+ if (reseed) { recreateDB();} 
 
 module.exports = app;
