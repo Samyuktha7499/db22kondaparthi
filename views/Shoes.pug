@@ -1,37 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  let items = results
-  p Search results Shoes  
-  p 
-  div(class="container-fluid")
-        div(class="row")
-            -
-                let Shoes = [
-                    {
-                        "type": "Sneakers",
-                        "brand": "Nike" ,
-                        "size": 07
-                    },
-                    {
-                        "type": "Boots",
-                        "brand": "Woodland", 
-                        "size": 06
-                    },
-                    {
-                        "type": "sports",
-                        "brand": "Adidas" ,
-                        "size": 05
-                    },                   
-                ]
-            each v,index in Shoes 
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.type}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.brand}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.size}
-
-  script.                
-        function buy(intemNo)
-        {
-              alert(`you purchased Item ${intemNo+1}`)
-        }
+    h1= title
+    - let items = results
+    p Search results Shoes
+    p 
+    div(class="container-fluid")
+            div(class="row")
+                each v,index in items 
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.type}
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.brand}
+                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.size}
+    script.                
+            function buy(intemNo)
+            {
+                alert(`you purchased Item ${intemNo+1}`)
+            }
