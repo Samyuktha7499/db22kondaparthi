@@ -1,0 +1,19 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  - let type = toShow.type
+  - let brand = toShow.brand  
+  - let size = toShow.size 
+  div 
+    div.row 
+      div(class='shoesAttr mr-3') shoes type is: 
+      div #{type} 
+    div.row 
+      div(class='shoesAttr mr-3') shoes brand is: 
+      div #{brand} 
+    div.row 
+      div(class='shoesAttr mr-3') shoes Size is: 
+      div #{size} 
+    
