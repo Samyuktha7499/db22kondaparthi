@@ -2,18 +2,23 @@ extends layout
  
 block content 
   h1= title 
- 
-  - let type = toShow.type
-  - let brand = toShow.brand  
-  - let size = toShow.size 
-  div 
-    div.row 
-      div(class='shoesAttr mr-3') shoes type is: 
-      div #{type} 
-    div.row 
-      div(class='shoesAttr mr-3') shoes brand is: 
-      div #{brand} 
-    div.row 
-      div(class='shoesAttr mr-3') shoes Size is: 
-      div #{size} 
-    
+  if (toShow == null) 
+    h2 No instance to show 
+  else 
+    - let shoesid = toShow._id 
+    - let type = toShow.type 
+    - let brand = toShow.brand 
+    - let size = toShow.size 
+    div 
+      div.row 
+        div(class='shoesAttr mr-3') shoes ID is: 
+        div #{shoesid} 
+      div.row 
+        div(class='shoesAttr mr-3') shoes type is: 
+        div #{type} 
+      div.row 
+        div(class='shoesAttr mr-3') shoes size is: 
+        div #{size} 
+      div.row 
+        div(class='shoesAttr mr-3') shoes brand is: 
+        div #{brand}
