@@ -1,4 +1,4 @@
-# fwb22kondaparthi
+# db22kondaparthi
 This is my second assignment on heroku server
 
 [heroku server] "https://db22kondaparthi.herokuapp.com/"
