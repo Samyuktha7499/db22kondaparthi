@@ -1,18 +1,25 @@
 extends layout
 
 block content
-    h1= title
-    - let items = results
-    p Search results Shoes
-    p 
-    div(class="container-fluid")
-            div(class="row")
-                each v,index in items 
-                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.type}
-                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.brand}
-                    div(class="col-sm-2" onclick=`buy(${index})`) #{v.size}
-    script.                
-            function buy(intemNo)
-            {
-                alert(`you purchased Item ${intemNo+1}`)
-            }
+  h1= title
+  
+  p Search results Shoes   
+  p
+  - let items = results 
+    div(class="container-fluid") 
+    div(class="row m-1") 
+      each item in items  
+        - let destination = `dispatch(\"/shoes/update?id=${item._id}\")` 
+        div(class="row-sm-2", class="m-1") Item #{item.type}(#{item.brand}) is #{item.size} 
+          button.btn( class="btn-primary ml-1", onclick= destination) Update 
+   
+  script. 
+    function dispatch(path){ 
+      window.location.href=path 
+    }
+
+  script.                
+        function buy(intemNo)
+        {
+              alert(`you purchased Item ${intemNo+1}`)
+        }
