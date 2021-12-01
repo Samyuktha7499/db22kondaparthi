@@ -10,7 +10,15 @@ block content
     div(class="row m-1") 
       each item in items  
         - let destination = `dispatch(\"/shoes/update?id=${item._id}\")` 
+        - let details = `dispatch(\"/shoes/detail?id=${item._id}\")` 
         div(class="row-sm-2", class="m-1") Item #{item.type}(#{item.brand}) is #{item.size} 
+          <br><br>
+          a(class="btn btn-success", href="/shoes/create") Create
+          <br>
+          span(class="btn btn-info", onclick= details) Details
+          <br>
+          a(class="btn btn-danger", href="/shoes/Delete/?id="+item._id) Delete
+          <br>
           button.btn( class="btn-primary ml-1", onclick= destination) Update 
    
   script. 
